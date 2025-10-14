@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen
 import com.Addavi.addaviflow.R
@@ -46,9 +47,16 @@ fun SplashScreen(onTimout : () -> Unit){
                 contentDescription = "logo"
             )
             Text(
-                text = "Addavi Team",
+                text = "Addavi Flow",
                 color = colorResource(R.color.white),
-                fontSize = 17.sp
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "How much today",
+                color = colorResource(R.color.scend_text),
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold
             )
         }
     }
