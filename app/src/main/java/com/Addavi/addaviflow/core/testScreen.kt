@@ -1,6 +1,8 @@
 package com.Addavi.addaviflow.core
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
@@ -29,18 +33,24 @@ import com.Addavi.addaviflow.R
 
 @Composable
 fun TestScreen() {
-    Scaffold() { paddingValues ->
+    Scaffold(
+        modifier = Modifier
+            .background(colorResource(R.color.background))
+            .statusBarsPadding()
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .background(colorResource(R.color.background))
                 .padding(horizontal = 16.dp)
+                .padding(bottom = 100.dp)
 
         ) {
             Text(
                 text = "Setting",
                 fontSize = 28.sp,
-                color = colorResource(R.color.primary),
+                color = colorResource(R.color.primary_text),
                 modifier = Modifier
                     .statusBarsPadding()
                     .padding(vertical = 15.dp)
@@ -49,12 +59,26 @@ fun TestScreen() {
                 color = colorResource(R.color.scend_text).copy(alpha = 0.3f),
                 thickness = 1.5.dp,
             )
-            LazyColumn(
-                contentPadding = paddingValues
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(top = 25.dp)
             ) {
-                item { SettingItems(1, "Theme") }
-                item { SettingItems(1, "Language") }
-                item { SettingItems(1, "Font Size") }
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme")
             }
         }
     }
@@ -85,12 +109,12 @@ fun SettingItems(Id: Int, name: String) {
             modifier = Modifier
                 .width(70.dp)
                 .clip(RoundedCornerShape(4.dp))
-                .background(colorResource(R.color.primary))
+                .background(colorResource(R.color.primary).copy(alpha = 0.2f))
                 .padding(vertical = 2.dp)
         ) {
             Text(
                 text = "Change",
-                color = colorResource(R.color.black)
+                color = colorResource(R.color.primary)
             )
         }
     }

@@ -78,13 +78,12 @@ fun BottomNavBar(
     ) {
         Row(
             modifier = Modifier
-                .padding(horizontal = 10.dp)
+                .padding(horizontal = 25.dp)
                 .navigationBarsPadding()
-                .clip(RoundedCornerShape(20.dp))
                 .fillMaxWidth()
-                .background(colorResource(R.color.background))
-                .shadow(8.dp)
-                .padding(vertical = 15.dp),
+                .clip(RoundedCornerShape(20.dp))
+                .background(colorResource(R.color.white))
+                .padding(vertical = 10.dp),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -131,7 +130,7 @@ fun BottomNavBar(
                         Text(
                             text = item.title,
                             fontSize = 17.sp,
-                            color = colorResource(R.color.primary_text)
+                            color = colorResource(R.color.black)
                         )
                     }
                 }

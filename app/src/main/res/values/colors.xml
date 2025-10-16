@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#000000</color>
-    <color name="primary">#FFFFFF</color>
+    <color name="bottomNav">#2C2C2C</color>
+    <color name="primary">#18C267</color>
     <color name="primary_text">#FFFFFF</color>
     <color name="scend_text">#D9D9D9</color>
 </resources>
