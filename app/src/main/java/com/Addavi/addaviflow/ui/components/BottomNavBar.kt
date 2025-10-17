@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -78,11 +79,11 @@ fun BottomNavBar(
     ) {
         Row(
             modifier = Modifier
-                .padding(horizontal = 25.dp)
+                .padding(horizontal = 7.dp)
                 .navigationBarsPadding()
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(20.dp))
-                .background(colorResource(R.color.white))
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(vertical = 10.dp),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
@@ -99,7 +100,7 @@ fun BottomNavBar(
                                 .scale(scale)
                                 .alpha(alpha)
                                 .clip(RoundedCornerShape(10.dp))
-                                .background(colorResource(R.color.primary).copy(alpha = 0.25f))
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.25f))
                             else Modifier
                         )
                         .padding(horizontal = 5.dp, vertical = 3.dp)
@@ -121,7 +122,7 @@ fun BottomNavBar(
                     Icon(
                         painter = painterResource(item.icon),
                         contentDescription = "Icon",
-                        tint = colorResource(R.color.primary),
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .size(28.dp)
                     )
@@ -130,7 +131,7 @@ fun BottomNavBar(
                         Text(
                             text = item.title,
                             fontSize = 17.sp,
-                            color = colorResource(R.color.black)
+                            color = MaterialTheme.colorScheme.background
                         )
                     }
                 }

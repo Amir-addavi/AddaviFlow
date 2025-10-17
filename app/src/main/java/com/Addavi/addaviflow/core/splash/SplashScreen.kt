@@ -8,6 +8,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen
 import com.Addavi.addaviflow.R
@@ -37,24 +40,26 @@ fun SplashScreen(onTimout : () -> Unit){
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(R.color.background))
+            .background(MaterialTheme.colorScheme.background)
     ){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(R.drawable.logo22),
-                contentDescription = "logo"
+                painter = painterResource(R.drawable.splash_ico),
+                contentDescription = "logo",
+                modifier = Modifier
+                    .width(110.dp)
             )
             Text(
                 text = "Addavi Flow",
-                color = colorResource(R.color.white),
+                color = MaterialTheme.colorScheme.surface,
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "How much today",
-                color = colorResource(R.color.scend_text),
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold
             )

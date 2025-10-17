@@ -2,6 +2,7 @@ package com.Addavi.addaviflow.core
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,9 +20,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,20 +36,24 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.Addavi.addaviflow.R
+import com.Addavi.addaviflow.ui.components.ThemePickerBottomSheet
 
 @Composable
 fun TestScreen() {
+    var  showThemSheet by remember { mutableStateOf(false) }
+
     Scaffold(
         modifier = Modifier
-            .background(colorResource(R.color.background))
+            .background(MaterialTheme.colorScheme.background)
             .statusBarsPadding()
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .background(colorResource(R.color.background))
+                .background(MaterialTheme.colorScheme.background)
                 .padding(horizontal = 16.dp)
                 .padding(bottom = 100.dp)
 
@@ -50,13 +61,13 @@ fun TestScreen() {
             Text(
                 text = "Setting",
                 fontSize = 28.sp,
-                color = colorResource(R.color.primary_text),
+                color = MaterialTheme.colorScheme.surface,
                 modifier = Modifier
                     .statusBarsPadding()
                     .padding(vertical = 15.dp)
             )
             Divider(
-                color = colorResource(R.color.scend_text).copy(alpha = 0.3f),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
                 thickness = 1.5.dp,
             )
             Column(
@@ -64,28 +75,20 @@ fun TestScreen() {
                     .padding(paddingValues)
                     .padding(top = 25.dp)
             ) {
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
-                SettingItems(1 , "Theme")
+                SettingItems(1 , "Theme"){showThemSheet = true}
             }
+        }
+        if (showThemSheet){
+            ThemePickerBottomSheet(
+                sheetVisible = showThemSheet,
+                onDimiss = {showThemSheet = false}
+            )
         }
     }
 }
 
 @Composable
-fun SettingItems(Id: Int, name: String) {
+fun SettingItems(Id: Int, name: String , onClick : () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -94,13 +97,13 @@ fun SettingItems(Id: Int, name: String) {
             .fillMaxWidth()
             .height(50.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(colorResource(R.color.primary_text).copy(alpha = 0.15f))
+            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.15f))
             .padding(horizontal = 15.dp)
     ) {
         Text(
             text = name,
             fontSize = 18.sp,
-            color = colorResource(R.color.scend_text),
+            color = MaterialTheme.colorScheme.surface,
             fontWeight = FontWeight.Bold
         )
         Row(
@@ -108,8 +111,9 @@ fun SettingItems(Id: Int, name: String) {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .width(70.dp)
+                .clickable { onClick() }
                 .clip(RoundedCornerShape(4.dp))
-                .background(colorResource(R.color.primary).copy(alpha = 0.2f))
+                .background(colorResource(R.color.primary).copy(alpha = 0.28f))
                 .padding(vertical = 2.dp)
         ) {
             Text(

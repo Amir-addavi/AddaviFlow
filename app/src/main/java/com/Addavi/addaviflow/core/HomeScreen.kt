@@ -24,6 +24,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,7 +42,7 @@ import com.Addavi.addaviflow.R
 fun HomeScreen(){
     Column (
         modifier = Modifier.fillMaxSize()
-            .background(colorResource(R.color.background))
+            .background(MaterialTheme.colorScheme.background)
     ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -103,7 +104,7 @@ fun ArzDataComponent(id : Int , pic : Int ,fullname : String, name : String , ol
             .fillMaxWidth(0.48f)
             .aspectRatio(1.4f)
             .clip(RoundedCornerShape(17.dp))
-            .background(colorResource(R.color.bottomNav))
+            .background(MaterialTheme.colorScheme.onPrimary)
     ) {
         Column(
             modifier = Modifier
@@ -127,13 +128,13 @@ fun ArzDataComponent(id : Int , pic : Int ,fullname : String, name : String , ol
                     Text(
                         text = fullname,
                         fontSize = 12.sp,
-                        color = colorResource(R.color.scend_text),
+                        color = MaterialTheme.colorScheme.onSurface,
                         lineHeight = 1.sp
                     )
                     Text(
                         text = name,
                         fontSize = 18.sp,
-                        color = colorResource(R.color.primary_text),
+                        color = MaterialTheme.colorScheme.surface,
                         fontWeight = FontWeight.Bold,
                         lineHeight = 1.sp
                     )
@@ -143,13 +144,13 @@ fun ArzDataComponent(id : Int , pic : Int ,fullname : String, name : String , ol
             Column {
                 Text(
                     text = oldprice,
-                    color = colorResource(R.color.scend_text),
+                    color = MaterialTheme.colorScheme.onSurface,
                     lineHeight = 1.sp
                 )
                 Text(
                     text = price,
                     fontSize = 25.sp,
-                    color = colorResource(R.color.primary)
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
