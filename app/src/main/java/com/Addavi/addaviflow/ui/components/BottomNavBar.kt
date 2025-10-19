@@ -6,6 +6,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,17 +57,18 @@ fun BottomNavBar(
     modifier: Modifier = Modifier,
 ) {
     val scope = rememberCoroutineScope()
+    val interactionSource = remember { MutableInteractionSource() }
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
     var isPressed by remember { mutableStateOf(false) }
     val alpha by animateFloatAsState(
-        targetValue = if (isPressed) 0.1f else 1.0f,
-        animationSpec = tween(durationMillis = 500),
+        targetValue = if (isPressed) 0.8f else 1.0f,
+        animationSpec = tween(durationMillis = 100),
         label = ""
     )
     val  scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.8f else 1.0f,
-        animationSpec = tween(durationMillis = 500),
+        targetValue = if (isPressed) 1.1f else 1.0f,
+        animationSpec = tween(durationMillis = 100),
         label = ""
     )
 
@@ -104,7 +106,7 @@ fun BottomNavBar(
                             else Modifier
                         )
                         .padding(horizontal = 5.dp, vertical = 3.dp)
-                        .clickable(currentRoute != item.route) {
+                        .clickable(enabled = currentRoute != item.route , indication = null , interactionSource = interactionSource ) {
                             isPressed = true
                             navController.navigate(item.route) {
                                 launchSingleTop = true
@@ -119,8 +121,9 @@ fun BottomNavBar(
                             }
                         }
                 ) {
+                    val icon = painterResource(if (selected) item.selectIcon else item.icon)
                     Icon(
-                        painter = painterResource(item.icon),
+                        painter = icon,
                         contentDescription = "Icon",
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
