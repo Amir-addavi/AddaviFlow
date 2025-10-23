@@ -15,7 +15,7 @@ private val THEME_KEY = stringPreferencesKey("App_Theme_mode")
 
 fun Context.themeModeFlow(): Flow<ThemeMode>{
     return this.dataStore.data.map {
-        preferences ->
+            preferences ->
         val value = preferences[THEME_KEY] ?: ThemeMode.SYSTEM.name
         try {
             ThemeMode.valueOf(value)
@@ -28,3 +28,4 @@ fun Context.themeModeFlow(): Flow<ThemeMode>{
 suspend fun Context.saveThemeMode(mode : ThemeMode){
     this.dataStore.edit { preferences -> preferences[THEME_KEY] = mode.name }
 }
+

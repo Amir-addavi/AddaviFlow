@@ -67,7 +67,7 @@ fun BottomNavBar(
         label = ""
     )
     val  scale by animateFloatAsState(
-        targetValue = if (isPressed) 1.1f else 1.0f,
+        targetValue = if (isPressed) 0.9f else 1.0f,
         animationSpec = tween(durationMillis = 100),
         label = ""
     )

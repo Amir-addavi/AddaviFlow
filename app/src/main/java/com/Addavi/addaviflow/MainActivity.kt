@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,14 +31,17 @@ import com.Addavi.addaviflow.core.splash.SplashScreen
 import com.Addavi.addaviflow.model.bottemNavItem
 import com.Addavi.addaviflow.ui.components.BottomNavBar
 import com.Addavi.addaviflow.ui.theme.AddaviFlowTheme
+import com.Addavi.addaviflow.viewmodel.FetchDataViewModel
 import com.Addavi.addaviflow.viewmodel.ThemeViewModel
 
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val arzViewModel : FetchDataViewModel = viewModel()
             val themeViewModel :ThemeViewModel = viewModel()
             val currentTheme by themeViewModel.themeModeState.collectAsState()
             AddaviFlowTheme(themeMode = currentTheme) {

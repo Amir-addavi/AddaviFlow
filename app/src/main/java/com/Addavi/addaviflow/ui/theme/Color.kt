@@ -18,7 +18,7 @@ val on_error_light = Color(0xFFBD0731)
 
 val primary_dark = Color(0xFF18C267)
 val onPrimary_dark = Color(0xFF2C2C2C)
-val background_dark = Color(0xFF000000)
+val background_dark = Color(0xFF000002)
 val onPrimaryText_dark= Color(0xFFFFFFFF)
 val secendryText_dark= Color(0xFF737373)
 val error_dark = Color(0xFFC52045)
