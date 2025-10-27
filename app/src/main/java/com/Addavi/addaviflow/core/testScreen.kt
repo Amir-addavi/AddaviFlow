@@ -45,16 +45,23 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.Addavi.addaviflow.R
-import com.Addavi.addaviflow.ui.components.ThemePickerBottomSheet
+import com.Addavi.addaviflow.ui.components.DialogLang
+import com.Addavi.addaviflow.ui.components.DialogTheme
+import com.Addavi.addaviflow.ui.theme.VazirFamily
+import com.Addavi.addaviflow.viewmodel.LanguageViewModel
 
 @Composable
-fun TestScreen() {
+fun TestScreen(navController: NavController , languageViewModel: LanguageViewModel) {
     var showThemSheet by remember { mutableStateOf(false) }
+    var showLangDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier
@@ -71,9 +78,10 @@ fun TestScreen() {
 
         ) {
             Text(
-                text = "Setting",
+                text =  stringResource(R.string.setting),
                 color = MaterialTheme.colorScheme.surface,
                 fontSize = 28.sp,
+                fontFamily = VazirFamily,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .statusBarsPadding()
@@ -88,20 +96,28 @@ fun TestScreen() {
                     .padding(paddingValues)
                     .padding(top = 25.dp)
             ) {
-                SettingItems(1, "Theme") { showThemSheet = true }
+                SettingItems(1, R.drawable.theme_ico ,  stringResource(R.string.setting_theme)) { showThemSheet = true }
+                SettingItems(3, R.drawable.language_ico ,  stringResource(R.string.Language)) { showLangDialog = true }
+                SettingItems(2, R.drawable.info_ico, stringResource(R.string.setting_about)) { navController.navigate("info") }
             }
         }
         if (showThemSheet) {
-            ThemePickerBottomSheet(
-                sheetVisible = showThemSheet,
-                onDimiss = { showThemSheet = false }
+            DialogTheme(
+                onDismiss = { showThemSheet = false },
+                languageViewModel = languageViewModel
+            )
+        }
+        if (showLangDialog){
+            DialogLang(
+                onDismiss = { showLangDialog = false },
+                languageViewModel = languageViewModel
             )
         }
     }
 }
 
 @Composable
-fun SettingItems(Id: Int, name: String, onClick: () -> Unit) {
+fun SettingItems(Id: Int, pic: Int,name: String, onClick: () -> Unit) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
@@ -141,18 +157,19 @@ fun SettingItems(Id: Int, name: String, onClick: () -> Unit) {
                     .padding(10.dp)
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.theme_ico),
+                    painter = painterResource(pic),
                     contentDescription = "icon",
                     tint = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(23.dp)
                 )
             }
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = name,
                 fontSize = 18.sp,
+                fontFamily = VazirFamily,
                 color = MaterialTheme.colorScheme.surface,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Medium
             )
         }
         Icon(

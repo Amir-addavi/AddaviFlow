@@ -18,11 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen
 import com.Addavi.addaviflow.R
+import com.Addavi.addaviflow.ui.theme.VazirFamily
 import kotlinx.coroutines.delay
 
 @Composable
@@ -46,22 +48,17 @@ fun SplashScreen(onTimout : () -> Unit){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(R.drawable.splash_ico),
+                painter = painterResource(R.drawable.flow),
                 contentDescription = "logo",
                 modifier = Modifier
-                    .width(110.dp)
+                    .width(120.dp)
             )
             Text(
-                text = "Addavi Flow",
+                text = "Flow Today",
                 color = MaterialTheme.colorScheme.surface,
-                fontSize = 17.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "How much today",
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold
+                fontSize = 19.sp,
+                fontFamily = VazirFamily,
+                fontWeight = FontWeight.Medium
             )
         }
     }

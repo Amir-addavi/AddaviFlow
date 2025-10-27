@@ -27,23 +27,41 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.Addavi.addaviflow.ui.theme.VazirFamily
 
 @Composable
-fun ErrorPage(pic: Int , name: String , desc: String , btnText: String , onclick: () -> Unit){
+fun ErrorPage(pic: Int, name: String, desc: String, btnText: String, onclick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(horizontal = 22.dp)
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding( 10.dp)
+            .padding(10.dp)
             .padding(vertical = 40.dp)
     ) {
-        Image(painter = painterResource(pic), contentDescription = "errorIcon" , modifier = Modifier.width(130.dp))
+        Image(
+            painter = painterResource(pic),
+            contentDescription = "errorIcon",
+            modifier = Modifier.width(130.dp)
+        )
         Spacer(modifier = Modifier.height(25.dp))
-        Text(text = name , fontSize = 22.sp , fontWeight = FontWeight.Bold ,color = MaterialTheme.colorScheme.error)
+        Text(
+            text = name,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = VazirFamily,
+            color = MaterialTheme.colorScheme.error
+        )
         Spacer(modifier = Modifier.height(15.dp))
-        Text(text = desc , fontSize = 15.sp , color = MaterialTheme.colorScheme.onSurface , lineHeight = 15.sp , textAlign = TextAlign.Center)
+        Text(
+            text = desc,
+            fontSize = 15.sp,
+            color = MaterialTheme.colorScheme.onSurface,
+            fontFamily = VazirFamily,
+            lineHeight = 20.sp,
+            textAlign = TextAlign.Center
+        )
         Spacer(modifier = Modifier.height(20.dp))
         TextButton(
             onClick = onclick,
@@ -54,8 +72,11 @@ fun ErrorPage(pic: Int , name: String , desc: String , btnText: String , onclick
             ),
             modifier = Modifier
                 .width(150.dp)
-        ) { Text(
-            text = btnText
-        )}
+        ) {
+            Text(
+                text = btnText,
+                fontFamily = VazirFamily,
+            )
+        }
     }
 }

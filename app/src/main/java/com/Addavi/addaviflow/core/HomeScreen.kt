@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -28,6 +29,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.TextButton
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -53,6 +56,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -66,15 +70,11 @@ import com.Addavi.addaviflow.data.uidata.ArzUiModel
 import com.Addavi.addaviflow.ui.animations.LoadingShimmerAnimation
 import com.Addavi.addaviflow.ui.components.ErrorPage
 import com.Addavi.addaviflow.ui.components.LoadingGridBox
+import com.Addavi.addaviflow.ui.theme.VazirFamily
 import com.Addavi.addaviflow.viewmodel.FetchDataViewModel
 import com.Addavi.addaviflow.viewmodel.Resource
 
-data class ManualArzData(
-    val picResId: Int,
-    val fullName: String,
-    val name: String,
-    val oldPrice: String
-)
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
@@ -109,18 +109,30 @@ fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
                 .background(MaterialTheme.colorScheme.background)
         ) {
             Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .statusBarsPadding()
                     .fillMaxWidth()
                     .padding(horizontal = 17.dp)
-                    .padding(top = 8.dp)
             ) {
                 Text(
-                    text = "Addavi Flow",
+                    text = stringResource(R.string.app_name),
                     color = MaterialTheme.colorScheme.surface,
-                    fontSize = 28.sp,
+                    fontSize = 25.sp,
+                    fontFamily = VazirFamily,
                     fontWeight = FontWeight.Bold
                 )
+                IconButton(
+                    onClick = { arzViewModel.FetchData() }
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.refresh_ico),
+                        contentDescription = "icon",
+                        tint = MaterialTheme.colorScheme.surface,
+                        modifier = Modifier.size(35.dp)
+                    )
+                }
             }
             when (arzData) {
                 is Resource.Loading -> {
@@ -138,7 +150,7 @@ fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
                     }
                 }
                 is Resource.Error -> {
-                    ErrorPage(R.drawable.error_ico , "No Internet Connection" , "Network error occurred. Please verify your internet connection and try again" , "try agen") { arzViewModel.FetchData() }
+                    ErrorPage(R.drawable.error_ico , stringResource(R.string.error_connect) , stringResource(R.string.error_connect_dec) , stringResource(R.string.error_connect_btn)) { arzViewModel.FetchData() }
                 }
                 is Resource.Success->{
                     LaunchedEffect(arzData) {
@@ -161,8 +173,8 @@ fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
                         items(data){item->
                             ArzDataComponent(
                                 pic = painterResource(item.type.icon),
-                                fullname = item.type.fulltitle,
-                                name = item.type.name,
+                                fullname = stringResource(item.type.fulltitle),
+                                name = stringResource(item.type.title),
                                 oldprice = "${item.date}R",
                                 price = "${item.price}R",
                                 status = item.dt
@@ -184,7 +196,7 @@ fun ArzDataComponent(pic: Painter, fullname: String, name: String, oldprice: Str
     Box(
         modifier = Modifier
             .fillMaxWidth(0.48f)
-            .aspectRatio(1.4f)
+            .aspectRatio(1.3f)
             .clip(RoundedCornerShape(17.dp))
             .background(MaterialTheme.colorScheme.onPrimary)
     ) {
@@ -211,25 +223,28 @@ fun ArzDataComponent(pic: Painter, fullname: String, name: String, oldprice: Str
                         text = fullname,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface,
+                        fontFamily = VazirFamily,
+                        fontWeight = FontWeight.Medium,
                         lineHeight = 1.sp
                     )
                     Text(
                         text = name,
                         fontSize = 18.sp,
                         color = MaterialTheme.colorScheme.surface,
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.Medium,
+                        fontFamily = VazirFamily,
                         lineHeight = 1.sp
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Column {
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ){
                     Image(
-                        painter = painterResource(when (status){"low"-> R.drawable.down_arrow_ico "high"-> R.drawable.up_arrow_ico else-> R.drawable.splash_ico}),
+                        painter = painterResource(when (status){"low"-> R.drawable.down_arrow_ico "high"-> R.drawable.up_arrow_ico else-> R.drawable.nochange_ico}),
                         contentDescription = "icon",
                         modifier = Modifier
                             .width(14.dp)
@@ -237,6 +252,8 @@ fun ArzDataComponent(pic: Painter, fullname: String, name: String, oldprice: Str
                     )
                     Text(
                         text = oldprice,
+                        fontFamily = VazirFamily,
+                        fontSize = 14.sp,
                         color = when (status){
                             "low"-> MaterialTheme.colorScheme.error
                             "high"->MaterialTheme.colorScheme.primary
@@ -247,7 +264,8 @@ fun ArzDataComponent(pic: Painter, fullname: String, name: String, oldprice: Str
                 }
                 Text(
                     text = price,
-                    fontSize = 20.sp,
+                    fontFamily = VazirFamily,
+                    fontSize = 17.sp,
                     color = MaterialTheme.colorScheme.surface
                 )
             }

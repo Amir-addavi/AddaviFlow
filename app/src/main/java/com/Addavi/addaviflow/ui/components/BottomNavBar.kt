@@ -41,12 +41,14 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.Addavi.addaviflow.R
 import com.Addavi.addaviflow.model.BottemNavItem
+import com.Addavi.addaviflow.ui.theme.VazirFamily
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -132,8 +134,9 @@ fun BottomNavBar(
                     Spacer(modifier = Modifier.width(3.dp))
                     if (selected) {
                         Text(
-                            text = item.title,
-                            fontSize = 17.sp,
+                            text = stringResource(item.title),
+                            fontSize = 14.sp,
+                            fontFamily = VazirFamily,
                             color = MaterialTheme.colorScheme.background
                         )
                     }
