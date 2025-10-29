@@ -1,5 +1,6 @@
 package com.Addavi.addaviflow.core
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.webkit.WebView
@@ -221,14 +222,14 @@ fun InfoScreen(navController: NavHostController ) {
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.surface,
                 )
-                contactUs(R.drawable.github_ico, "GitHub") {
-                    navController.navigate("webview/${Uri.encode(githubUrl)}")
+                ContactUs(R.drawable.github_ico, "GitHub") {
+                    safeOpenUrl(context, githubUrl)
                 }
 
-                contactUs(R.drawable.linkedin_ico, "LinkedIn") {
-                    navController.navigate("webview/${Uri.encode(linkedinUrl)}")
+                ContactUs(R.drawable.linkedin_ico, "LinkedIn") {
+                    safeOpenUrl(context, linkedinUrl)
                 }
-                contactUs(R.drawable.email_ico, "Email") {
+                ContactUs(R.drawable.email_ico, "Email") {
                     clipboardManager.setText(androidx.compose.ui.text.AnnotatedString(emailAddress))
                     Toast
                         .makeText(context, "Copied!", Toast.LENGTH_SHORT)
@@ -240,7 +241,7 @@ fun InfoScreen(navController: NavHostController ) {
 }
 
 @Composable
-fun contactUs(pic: Int, name: String, link:  () -> Unit) {
+fun ContactUs(pic: Int, name: String, link:  () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -286,21 +287,20 @@ fun contactUs(pic: Int, name: String, link:  () -> Unit) {
         )
     }
 }
-@Composable
-fun LoadWebUrl(url: String) {
-    val context = LocalContext.current
 
-    AndroidView(
-        factory = {
-            WebView(context).apply {
-                webViewClient = WebViewClient()
-                settings.javaScriptEnabled = true
-                settings.domStorageEnabled = true
-                loadUrl(url)
-            }
-        },
-        update = {
-            it.loadUrl(url)
+fun safeOpenUrl(context: Context, url: String) {
+    try {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
-    )
+        val resolveInfo = context.packageManager.resolveActivity(intent, 0)
+        if (resolveInfo != null) {
+            context.startActivity(intent)
+        } else {
+            Toast.makeText(context, "مرورگری برای باز کردن لینک پیدا نشد.", Toast.LENGTH_SHORT).show()
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Toast.makeText(context, "خطا در باز کردن لینک.", Toast.LENGTH_SHORT).show()
+    }
 }

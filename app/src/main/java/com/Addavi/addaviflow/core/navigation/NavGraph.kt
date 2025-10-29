@@ -12,7 +12,6 @@ import com.Addavi.addaviflow.core.HomeScreen
 import com.Addavi.addaviflow.core.InfoScreen
 import com.Addavi.addaviflow.core.TestScreen
 import com.Addavi.addaviflow.model.BottemNavItem
-import com.Addavi.addaviflow.ui.components.WebViewScreen
 import com.Addavi.addaviflow.viewmodel.LanguageViewModel
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -51,10 +50,6 @@ fun SetupNavGraph(navController: NavHostController , languageViewModel: Language
                 animationSpec = tween(600))
         }
         ) { InfoScreen(navController = navController) }
-        composable("webview/{url}") { backStackEntry ->
-            val url = backStackEntry.arguments?.getString("url") ?: ""
-            WebViewScreen(url = url , navController)
-        }
     }
 }
 
