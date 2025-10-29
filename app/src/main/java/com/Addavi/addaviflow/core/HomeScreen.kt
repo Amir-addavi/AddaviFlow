@@ -175,8 +175,8 @@ fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
                                 pic = painterResource(item.type.icon),
                                 fullname = stringResource(item.type.fulltitle),
                                 name = stringResource(item.type.title),
-                                oldprice = "${item.date}R",
-                                price = "${item.price}R",
+                                oldprice = item.date,
+                                price = item.price,
                                 status = item.dt
                             )
                         }

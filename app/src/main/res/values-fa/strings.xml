@@ -48,4 +48,12 @@
     <string name="error_connect_dec">لطفا ابتدا اتصال اینترنت خود را برسی کنید و سپس روی \"تلاش مجدد \" کلیک کنید</string>
     <string name="error_connect_btn">تلاش مجدد</string>
     <string name="info_text">جریان امروز یک اپلیکیشن ساده و کاربردی برای مشاهده‌ی لحظه‌ای قیمت ارز، طلا و سایر دارایی‌های ارزشمند است. این برنامه با هدف دسترسی سریع و دقیق به نرخ‌های روز طراحی شده تا کاربران بتوانند تنها با یک نگاه از آخرین تغییرات بازار مطلع شوند. در فلو تودی تلاش کرده‌ایم تجربه‌ای روان، زیبا و بدون پیچیدگی را ارائه دهیم تا اطلاعات مالی همیشه در دسترس شما باشد. از همراهی و اعتماد شما سپاسگزاریم.</string>
+    <string name="ethereum_title">اتریوم</string>
+    <string name="ethereum_full">اتریوم</string>
+    <string name="solana_title">سولانا</string>
+    <string name="solana_full">سولانا کریپتو</string>
+    <string name="doge_title">دوج</string>
+    <string name="doge_full">دوج کوین</string>
+    <string name="xrp_title">ریپل</string>
+    <string name="xrp_full">ریپل کریپتو</string>
 </resources>

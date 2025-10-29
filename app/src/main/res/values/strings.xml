@@ -48,4 +48,12 @@
     <string name="error_connect_dec">Network error occurred. Please verify your internet connection and try again</string>
     <string name="error_connect_btn">try again</string>
     <string name="info_text">Flow Today is a simple and practical application for viewing real-time prices of currencies, gold, and other valuable assets. It is designed to provide fast and accurate access to daily rates, allowing users to stay updated with just a quick glance. At Flow Today, we strive to deliver a smooth, elegant, and intuitive experience that keeps financial information always within reach. Thank you for your trust and continued support.</string>
+    <string name="ethereum_title">ETH</string>
+    <string name="ethereum_full">Ethereum</string>
+    <string name="solana_title">SOL</string>
+    <string name="solana_full">Solana</string>
+    <string name="doge_title">DOGE</string>
+    <string name="doge_full">DogeCoin</string>
+    <string name="xrp_title">XRP</string>
+    <string name="xrp_full">Ripple</string>
 </resources>

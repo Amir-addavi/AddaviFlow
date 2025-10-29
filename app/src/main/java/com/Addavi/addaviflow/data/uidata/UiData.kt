@@ -22,6 +22,10 @@ enum class UiData(
     NIM("nim" , R.string.nim_title , R.string.nim_full , R.drawable.coin_ico),
     BTC("crypto-bitcoin-irr" , R.string.btc_title , R.string.btc_full , R.drawable.bitc_ico),
     UST("crypto-tether-irr" , R.string.tether_title , R.string.tether_full , R.drawable.usdt_ico),
+    ETH("crypto-ethereum-irr" , R.string.ethereum_title , R.string.ethereum_full , R.drawable.eth_ico),
+    DOGE("crypto-dogecoin-irr" , R.string.doge_title , R.string.doge_full , R.drawable.dogecoin_ico),
+    SOL("crypto-solana-irr" , R.string.solana_title , R.string.solana_full , R.drawable.solana_ico),
+    XRP("crypto-ripple-irr" , R.string.xrp_title , R.string.xrp_full , R.drawable.xrp_ico),
     USD("price_dollar_rl" , R.string.dollar_title , R.string.dollar_full , R.drawable.usa_ico);
 
     companion object{
@@ -31,7 +35,7 @@ enum class UiData(
 
 data class ArzUiModel(
     val type: UiData,
-    val price : String,
-    val date : String,
-    val dt : String
+    val price: String,
+    val date: String,
+    val dt: String
 )
