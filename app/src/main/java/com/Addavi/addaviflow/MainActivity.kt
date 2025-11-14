@@ -1,7 +1,6 @@
 package com.Addavi.addaviflow
 
 import android.R
-import android.R.attr.layoutDirection
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -20,25 +19,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.Addavi.addaviflow.core.navigation.SetupNavGraph
 import com.Addavi.addaviflow.core.splash.SplashScreen
-import com.Addavi.addaviflow.model.bottemNavItem
+import com.Addavi.addaviflow.model.BottomNavItem
 import com.Addavi.addaviflow.ui.components.BottomNavBar
 import com.Addavi.addaviflow.ui.theme.AddaviFlowTheme
 import com.Addavi.addaviflow.util.LocaleHelper
-import com.Addavi.addaviflow.viewmodel.FetchDataViewModel
 import com.Addavi.addaviflow.viewmodel.LanguageViewModel
 import com.Addavi.addaviflow.viewmodel.ThemeViewModel
 
@@ -75,7 +69,7 @@ class MainActivity : ComponentActivity() {
                     } else {
                         Surface(
                             modifier = Modifier.fillMaxSize(),
-                            color = colorResource(R.color.transparent)
+                            color = MaterialTheme.colorScheme.background
                         ) {
                             Box(modifier = Modifier.fillMaxSize()) {
                                 SetupNavGraph(
@@ -86,7 +80,7 @@ class MainActivity : ComponentActivity() {
                                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
                                         BottomNavBar(
                                             navController = navController,
-                                            items = bottemNavItem,
+                                            items = BottomNavItem,
                                             modifier = Modifier
                                                 .align(Alignment.BottomCenter)
                                                 .padding(bottom = 10.dp)

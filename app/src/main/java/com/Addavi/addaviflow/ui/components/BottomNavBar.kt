@@ -88,7 +88,7 @@ fun BottomNavBar(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(20.dp))
                 .background(MaterialTheme.colorScheme.surface)
-                .padding(vertical = 10.dp),
+                .padding(vertical = 7.dp),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -103,11 +103,11 @@ fun BottomNavBar(
                             if (selected) Modifier
                                 .scale(scale)
                                 .alpha(alpha)
-                                .clip(RoundedCornerShape(10.dp))
+                                .clip(RoundedCornerShape(30.dp))
                                 .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.25f))
                             else Modifier
                         )
-                        .padding(horizontal = 5.dp, vertical = 3.dp)
+                        .padding(5.dp)
                         .clickable(enabled = currentRoute != item.route , indication = null , interactionSource = interactionSource ) {
                             isPressed = true
                             navController.navigate(item.route) {
@@ -129,12 +129,11 @@ fun BottomNavBar(
                         contentDescription = "Icon",
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
-                            .size(28.dp)
+                            .size(30.dp)
                     )
-                    Spacer(modifier = Modifier.width(3.dp))
                     if (selected) {
                         Text(
-                            text = stringResource(item.title),
+                            text = item.title,
                             fontSize = 14.sp,
                             fontFamily = VazirFamily,
                             color = MaterialTheme.colorScheme.background

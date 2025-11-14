@@ -1,23 +1,22 @@
 package com.Addavi.addaviflow.model
 
 import androidx.annotation.StringRes
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import com.Addavi.addaviflow.R
-
 
 
 sealed class BottemNavItem(
     val route : String,
-    @StringRes val  title : Int,
+    val  title : String,
     val icon : Int,
     val selectIcon : Int
 ){
-    object Home : BottemNavItem("Home", R.string.home, R.drawable.home2 , R.drawable.home_selected)
-    object Setting : BottemNavItem("Setting", R.string.setting_nav, R.drawable.setting2 , R.drawable.setting_selected)
+    object Search : BottemNavItem("Search", "", R.drawable.search_ico , R.drawable.search_ico)
+    object Home : BottemNavItem("Home", "", R.drawable.home2 , R.drawable.home_selected)
+    object Setting : BottemNavItem("Setting", "", R.drawable.setting2 , R.drawable.setting_selected)
 }
 
-val bottemNavItem = listOf(
+val BottomNavItem = listOf(
     BottemNavItem.Setting,
-    BottemNavItem.Home
+    BottemNavItem.Home,
+    BottemNavItem.Search
 )

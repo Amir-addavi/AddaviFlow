@@ -1,5 +1,13 @@
 package com.Addavi.addaviflow.core
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -53,16 +61,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.Addavi.addaviflow.R
 import com.Addavi.addaviflow.data.DataModel
 import com.Addavi.addaviflow.data.DataModelRoot
@@ -77,17 +88,18 @@ import com.Addavi.addaviflow.viewmodel.Resource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
-fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
+fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel() , navController: NavController){
 
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
 
-
     val columns = (screenWidth / 180).coerceAtLeast(2)
+
 
     var isRefreshing by remember { mutableStateOf(false) }
     val shimmerBrush = LoadingShimmerAnimation()
     val arzData by arzViewModel.allItem.collectAsStateWithLifecycle()
+
 
     val pullRefreshState = rememberPullRefreshState(
         refreshing = isRefreshing,
@@ -103,6 +115,7 @@ fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
             .pullRefresh(pullRefreshState)
             .background(MaterialTheme.colorScheme.background)
     ) {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -118,10 +131,10 @@ fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
             ) {
                 Text(
                     text = stringResource(R.string.app_name),
-                    color = MaterialTheme.colorScheme.surface,
                     fontSize = 25.sp,
                     fontFamily = VazirFamily,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.surface
                 )
                 IconButton(
                     onClick = { arzViewModel.FetchData() }
@@ -130,10 +143,11 @@ fun HomeScreen(arzViewModel : FetchDataViewModel = viewModel()){
                         painter = painterResource(R.drawable.refresh_ico),
                         contentDescription = "icon",
                         tint = MaterialTheme.colorScheme.surface,
-                        modifier = Modifier.size(35.dp)
+                        modifier = Modifier.size(30.dp)
                     )
                 }
             }
+
             when (arzData) {
                 is Resource.Loading -> {
                     LazyVerticalGrid(
